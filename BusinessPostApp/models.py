@@ -11,6 +11,8 @@ class BusinessCategory(models.Model):
     alias3 = models.CharField(max_length=50, null=True)
     alias4 = models.CharField(max_length=50, null=True)
     alias5 = models.CharField(max_length=50, null=True)
+
+
     class FieldNames:
         ENGLISH_NAME = "english_name"
         MARATHI_NAME = "marathi_name"
@@ -32,6 +34,7 @@ class BusinessPoints(models.Model):
 
 
 class BusinessPost(models.Model):
+   
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     business_category = models.ForeignKey(BusinessCategory, on_delete=models.PROTECT)
     business_type = models.CharField(max_length=20)
@@ -49,7 +52,7 @@ class BusinessPost(models.Model):
     discount = models.PositiveSmallIntegerField(null=True)
     email = models.EmailField(null=True)
     business_image = models.ImageField(upload_to='business_images', null=True)
-    likes_counter = models.PositiveIntegerField(default=0)
+    likes_counter = models.PositiveIntegerField(default=0,null=True)
     city = models.CharField(max_length=50, null=True)
     latitude = models.DecimalField(max_digits=8, decimal_places=6, null=True)
     longitude = models.DecimalField(max_digits=8, decimal_places=6, null=True)
@@ -57,6 +60,7 @@ class BusinessPost(models.Model):
     payment_amount = models.PositiveIntegerField(null=True)
     valid_till = models.DateTimeField(null=True)
     are_details_complete = models.BooleanField(default=False)
+    
     # can be set by user to enable/disable add
     is_active = models.BooleanField(default=False)
     # will be set by moderator
@@ -64,7 +68,8 @@ class BusinessPost(models.Model):
     # will be set by moderator
     #is_blocked = models.BooleanField(default=False)
     class FieldNames:
-        BUSINESS_CATEGORY = "business_category"
+        USER = "user_id"
+        BUSINESS_CATEGORY_ID = "business_category_id"
         BUSINESS_TYPE = "business_type"
         BUSINESS_NAME_ENGLISH = "business_name_english"
         BUSINESS_NAME_MARATHI = "business_name_marathi"
@@ -72,7 +77,9 @@ class BusinessPost(models.Model):
         START_TIME = "start_time"
         END_TIME = "end_time"
         WEEKLY_OFF = "weekly_off"
-        BUSINESS_POINTS = "business_points"
+        BUSINESS_POINT_1 = "business_point_1"
+        BUSINESS_POINT_2 = "business_point_2"
+        BUSINESS_POINT_3 = "business_point_3"
         BUSINESS_ADDRESS = "business_address"
         DISCOUNT = "discount"
         EMAIL = "email"
@@ -82,6 +89,8 @@ class BusinessPost(models.Model):
         LATITUDE = "latitude"
         LONGITUDE = "longitude"
         IS_PAYMENT_MADE = "is_payment_made"
+        ARE_DETAILS_COMPLETE =  "are_details_complete"
+        IS_ACTIVE = "is_active"
         PAYMENT_AMOUNT = "payment_amount"
         VALID_TILL = "valid_till"
 
@@ -102,3 +111,5 @@ class PaymentTransactions(models.Model):
         TIME = "time"
         SUCCESS = "success"
         FAILURE_REASON = "failure_reason"
+
+

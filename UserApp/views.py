@@ -25,6 +25,7 @@ class Login(APIView):
             if user.exists():
                 data = {
                 UtilityMethods.SUCCESS_KEY: True,
+                'user_id': user[0].id,
                 'user_type': user[0].user_type,
                 'contact_number': user[0].contact_number,
                 
